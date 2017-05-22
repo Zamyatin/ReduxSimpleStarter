@@ -8,7 +8,7 @@ import VideoDetail from './components/video_detail'
 
 const API_KEY = 'AIzaSyAMQn_ygOQbB5rjs_sw02p-2Li1iYhCl7k';
 const QUERY_DEBOUNCE = 300
-const OPENING_SEARCH_TERM = 'bmw r nineT pure'
+const OPENING_SEARCH_TERM = 'classic motorcycling'
 
 // Create a new component. This component should produce some HTML
 class App extends Component {
