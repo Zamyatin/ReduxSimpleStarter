@@ -7,8 +7,8 @@ import VideoList from './components/video_list'
 import VideoDetail from './components/video_detail'
 
 const API_KEY = 'AIzaSyAMQn_ygOQbB5rjs_sw02p-2Li1iYhCl7k';
-
-// for example:
+const QUERY_DEBOUNCE = 300
+const OPENING_SEARCH_TERM = 'bmw r nineT pure'
 
 // Create a new component. This component should produce some HTML
 class App extends Component {
@@ -20,7 +20,7 @@ class App extends Component {
       selectedVideo: null
     };
 
-    this.videoSearch('surfboards')
+    this.videoSearch(OPENING_SEARCH_TERM)
 
   }
 
@@ -31,13 +31,16 @@ class App extends Component {
         selectedVideo: videos[0]
       })
     });
-
   }
 
   render(){
+    const debouncedSearch = _.debounce((term) => {
+      this.videoSearch(term)
+    }, QUERY_DEBOUNCE);
+
     return (
       <div>
-        <SearchBar onSearchTermChange={term => this.videoSearch(term)}/>
+        <SearchBar onSearchTermChange={debouncedSearch}/>
         <VideoDetail video={this.state.selectedVideo} />
         <VideoList
           onVideoSelect={selectedVideo => this.setState({selectedVideo})}
